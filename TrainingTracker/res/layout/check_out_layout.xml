@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checkOutParentView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#C8DCFA"
+    android:gravity="center_horizontal"
+    android:clickable="true"
+    android:orientation="vertical" >
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/checkOutSuperParent"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp" 
+        android:layout_marginTop="0dp"
+        android:orientation="vertical">
+	    <Spinner
+	        android:id="@+id/categorySelectorID"
+	        android:layout_width="match_parent"
+	        android:layout_height="wrap_content"
+	        android:layout_marginBottom="7dp"
+	        android:layout_marginLeft="5dp"
+	        android:ems="10"
+	        android:inputType="text" />
+		    <LinearLayout
+		        android:id="@+id/checkOutScrollBin"
+		        android:paddingBottom="10dp"
+		        android:layout_width="match_parent"
+		        android:layout_height="0dp"
+		        android:layout_weight="1"
+		        android:orientation="horizontal"/>
+		    <com.upenn.trainingtracker.customviews.CheckOutProgressView
+		        android:id="@+id/checkOutProgressView"
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content"/>
+		    <LinearLayout
+		        android:layout_width="match_parent"
+		        android:layout_height="wrap_content" 
+		        android:gravity="center" 
+		        android:orientation="horizontal" >
+				<Button
+			        android:id="@+id/submitPlansButton"
+					android:padding="15dp"
+					android:layout_margin="10dp"
+		    		android:background="@drawable/generic_button_selector"
+		    		android:textStyle="bold"
+			        android:layout_width="0dp"
+			        android:layout_weight="1"
+			        android:layout_height="wrap_content"
+			        android:onClick="grabHistory"
+			        android:text="Grab History" />
+			    <Button
+			        android:id="@+id/submitPlansButton"
+					android:padding="15dp"
+					android:layout_margin="10dp"
+		    		android:background="@drawable/generic_button_selector"
+		    		android:textStyle="bold"
+			        android:layout_width="0dp"
+			        android:layout_weight="1"
+			        android:layout_height="wrap_content"
+					android:onClick="submitPlan"
+			        android:text="Submit Plans" />
+
+			<!-- <Button
+			        android:id="@+id/pressValuesButton"
+					android:padding="15dp"
+					android:layout_margin="10dp"
+			        android:onClick="pressValues"
+			        android:layout_width="wrap_content"
+			        android:layout_height="wrap_content"
+			        android:text="PressValues" />  -->
+			</LinearLayout>
+	</LinearLayout>
+
+</LinearLayout>

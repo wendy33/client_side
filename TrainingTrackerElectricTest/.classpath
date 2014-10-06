@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path="test"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/TrainingTracker"/>
+	<classpathentry kind="lib" path="lib/fest-util-1.1.6.jar"/>
+	<classpathentry kind="lib" path="lib/robolectric-2.3-with-dependencies.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/Android/sdk/platforms/android-19/android.jar"/>
+	<classpathentry kind="lib" path="C:/Program Files (x86)/Java/Android/sdk/add-ons/addon-google_apis-google-19/libs/maps.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>

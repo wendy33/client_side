@@ -1,63 +1,41 @@
 package com.upenn.trainingtracker;
 
-import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
-import java.util.Vector;
 
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.NameValuePair;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONObject;
 
 import com.upenn.trainingtracker.customviews.AutoBreedSelector;
 import com.upenn.trainingtracker.customviews.DateSelectorTextView;
 import com.upenn.trainingtracker.customviews.ImageSelectorImageView;
 
-import android.app.Activity;
+
 import android.app.AlertDialog;
-import android.app.AlertDialog.Builder;
 import android.app.Dialog;
-import android.app.ListActivity;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.v4.app.FragmentActivity;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Base64;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.view.View.OnClickListener;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.AutoCompleteTextView;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -86,7 +64,6 @@ public class DogSelectorActivity extends FragmentActivity implements Notifiable
 
 	private ImageSelectorImageView imageSelector;
 	private Dialog updateDialog;
-	private Adapter adapter;
 	private int dogIDBeingUpdated;
 	
 	@Override
@@ -170,18 +147,17 @@ public class DogSelectorActivity extends FragmentActivity implements Notifiable
 					@Override
 					public void onClick(DialogInterface dialog, int item) 
 					{
-						if (item == 0) // Train Dog
+						if (item == 0 || item == 1) // Train Dog or ViewHistory
 						{
-					   		Intent intent = new Intent(DogSelectorActivity.this, TrainingSelectorActivity.class);
+							Intent intent;
+					   		if(item == 0)
+					   			intent = new Intent(DogSelectorActivity.this, TrainingSelectorActivity.class);
+					   		else
+					   			intent = new Intent(DogSelectorActivity.this, HistoryActivity.class);
 					   		intent.putExtra("dogID", dogID);
 					   		DogSelectorActivity.this.startActivity(intent);
 						}
-						else if (item == 1) // View History
-						{
-							Intent intent = new Intent(DogSelectorActivity.this, HistoryActivity.class);
-							intent.putExtra("dogID", dogID);
-							DogSelectorActivity.this.startActivity(intent);
-						}
+			
 						else if (item == 2) // update profile
 						{
 							DogSelectorActivity.this.openUpdateDogPopUp(dogID);
@@ -554,11 +530,7 @@ public class DogSelectorActivity extends FragmentActivity implements Notifiable
 			//sm.syncDogsWithServer(this, this, RESULT_SYNC_DOGS);
 			//sm.syncDogInfoWithServer(this, this, RESULT_UPDATE_DOG);
 		}
-		else if (eventCode == RESULT_UPDATE_DOG)
-		{
-			this.refreshListDisplay();
-		}
-		else if(eventCode == RESULT_SYNC_EVERYTHING)
+		else if (eventCode == RESULT_UPDATE_DOG || eventCode == RESULT_SYNC_EVERYTHING)
 		{
 			this.refreshListDisplay();
 		}

@@ -61,9 +61,9 @@ public class DogAdapter extends BaseAdapter implements Filterable
 			int distance1 = this.computeLevenshteinDistance(name1, constraint);
 			int distance2 = this.computeLevenshteinDistance(name2, constraint);
 			
-			if (distance1 < distance2) return -10;
-			else if (distance1 > distance2) return 10;
-			else return 0;
+			if (distance1 < distance2) {return -10;}
+			else if (distance1 > distance2) {return 10;}
+			else {return 0;}
 		}
 		public void setConstraint(String constraint)
 		{
@@ -134,7 +134,6 @@ public class DogAdapter extends BaseAdapter implements Filterable
 			{
 				Log.i("TAG","Performing filtering");
 				FilterResults results = new FilterResults();
-				ArrayList<DogProfile> profilesFiltered = new ArrayList<DogProfile>();
 				
 				if (constraint == null)
 				{
@@ -154,7 +153,6 @@ public class DogAdapter extends BaseAdapter implements Filterable
 			@Override
 			protected void publishResults(CharSequence constraint, FilterResults results) 
 			{
-				DogAdapter.this.profiles = (ArrayList<DogProfile>) results.values;
 				DogAdapter.this.notifyDataSetChanged();
 			}
 			

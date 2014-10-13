@@ -26,8 +26,8 @@ public class Authenticator extends AbstractAccountAuthenticator {
     @Override
     public Bundle addAccount(
             AccountAuthenticatorResponse r,
-            String s,
-            String s2,
+            String typeAdded,
+            String typeRetrieved,
             String[] strings,
             Bundle bundle) throws NetworkErrorException {
         return null;

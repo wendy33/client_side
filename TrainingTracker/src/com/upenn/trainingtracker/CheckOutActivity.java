@@ -1,15 +1,11 @@
 package com.upenn.trainingtracker;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
+
+
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
-import com.upenn.trainingtracker.customviews.AutoCategorySelector;
 import com.upenn.trainingtracker.customviews.CheckOutProgressView;
 import com.upenn.trainingtracker.customviews.PlanningBinLayout;
 
@@ -22,25 +18,18 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.GestureDetector;
-import android.view.GestureDetector.SimpleOnGestureListener;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
-import android.view.animation.Animation;
-import android.view.animation.Animation.AnimationListener;
-import android.view.animation.TranslateAnimation;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
-import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.TableLayout;
 import android.widget.TableRow;
 import android.widget.TextView;
-import android.widget.Toast;
 
 public class CheckOutActivity extends Activity
 {
@@ -80,8 +69,6 @@ public class CheckOutActivity extends Activity
 		this.dogID = extras.getInt("dogID");
 		this.currentSubCatID = this.subCatIDs[0];
 		
-		//gestureDetectorInner = new MyGestureDetector();
-		//gestureDetector = new GestureDetector(this, gestureDetectorInner);
 		this.initializeLayout();
 		
 		
@@ -263,28 +250,14 @@ public class CheckOutActivity extends Activity
 			{
 				case CHECKBOX: 
 					canvasLayout = (TableRow) this.getCheckBoxFromQuestion(question, viewBinParent);
-					/*if (plan != null)
-					{
-						viewBinParent.setCheckBoxByKeys(entry.getNameKey(), plan.get(entry.getNameKey()));
-					}*/
 				break;
 				case OPTIONS: 
 					canvasLayout = (TableRow) this.getSpinnerFromQuestion(question, viewBinParent);
-					/*if (plan != null)
-					{
-						viewBinParent.setSpinnerByKeys(entry.getNameKey(), plan.get(entry.getNameKey()));
-						Log.i("TAG","changing");
-					}
-					else
-					{
-						Log.i("TAG", "null");
-					}*/
 				break;
 			}
 			viewBin.addView(canvasLayout);
 		}
 		
-		//this.attachSwipeListener(viewBin);
 		return viewBinParent;
 	}
 
@@ -319,194 +292,10 @@ public class CheckOutActivity extends Activity
 		return layout;
 	}
 
-	private void setSpinner(int subCatID)
-	{
-		int index = Arrays.asList(this.subCatIDs).indexOf(subCatID);
-		Spinner spinner = (Spinner) this.findViewById(R.id.categorySelectorID);
-	    spinner.setSelection(index);
-	}
-	/*
-	 * Methods for animation are below
-	 */
-/*	private void attachSwipeListener(View viewBin)
-	{
-		viewBin.setOnTouchListener(new View.OnTouchListener() {
-			@Override
-			public boolean onTouch(View arg0, MotionEvent event) {
-				return CheckOutActivity.this.gestureDetector.onTouchEvent(event);
-			}
-		});
-	}
-
-	public void swipeRight()
-	{
-		if (this.subCatIDs.length == 1) return;
-
-		final View view = this.subCatIDToView.get(this.currentSubCatID);
-		Animation animation = new TranslateAnimation(0, 1000,0, 0); //May need to check the direction you want.
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		view.startAnimation(animation);
-		final LinearLayout parentLayout = (LinearLayout) this.findViewById(R.id.checkOutScrollBin);
-		
-		animation.setAnimationListener(new AnimationListener(){
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				parentLayout.removeView(view);
-				
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-
-			}
-
-			@Override
-			public void onAnimationStart(Animation arg0) {
-			}
-		});
-		int index = Arrays.asList(this.subCatIDs).indexOf(this.currentSubCatID);
-		--index;
-		if (index < 0)
-		{
-			index = this.subCatIDs.length - 1;
-		}
-		this.currentSubCatID = this.subCatIDs[index];
-		final View nextView = this.subCatIDToView.get(this.currentSubCatID);
-		//parentLayout.removeAllViews();
-		parentLayout.addView(nextView);
-		animation = new TranslateAnimation(-500, 0,0, 0); //May need to check the direction you want.
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		nextView.startAnimation(animation);
-		this.setSpinner(this.currentSubCatID);
-		animation.setAnimationListener(new AnimationListener(){
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				CheckOutActivity.this.gestureDetectorInner.tellIsFinished();
-				CheckOutActivity.this.switchToViewBySubCatID(currentSubCatID);
-
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-				
-			}
-
-			@Override
-			public void onAnimationStart(Animation arg0) {
-				
-			}
-		});
-	}
-	public void swipeLeft()
-	{
-		if (this.subCatIDs.length == 1) return;
-		
-		final View view = this.subCatIDToView.get(this.currentSubCatID);
-		Animation animation = new TranslateAnimation(0, -1000,0, 0); //May need to check the direction you want.
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		view.startAnimation(animation);
-		final LinearLayout parentLayout = (LinearLayout) this.findViewById(R.id.checkOutScrollBin);
-
-		animation.setAnimationListener(new AnimationListener(){
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				parentLayout.removeView(view);
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-				
-			}
-
-			@Override
-			public void onAnimationStart(Animation arg0) {
-			}
-		});
-		int index = Arrays.asList(this.subCatIDs).indexOf(this.currentSubCatID);
-		++index;
-		if (index >= this.subCatIDs.length)
-		{
-			index = 0;
-		}
-		
-		this.currentSubCatID = this.subCatIDs[index];
-		final View nextView = this.subCatIDToView.get(this.currentSubCatID);
-		//parentLayout.removeAllViews();
-		parentLayout.addView(nextView);
-		animation = new TranslateAnimation(1000, 0,0, 0); //May need to check the direction you want.
-		animation.setDuration(400);
-		animation.setFillAfter(true);
-		nextView.startAnimation(animation);
-		this.setSpinner(this.currentSubCatID);
-		
-		animation.setAnimationListener(new AnimationListener(){
-
-			@Override
-			public void onAnimationEnd(Animation arg0) {
-				CheckOutActivity.this.gestureDetectorInner.tellIsFinished();
-				CheckOutActivity.this.switchToViewBySubCatID(currentSubCatID);
-			}
-
-			@Override
-			public void onAnimationRepeat(Animation arg0) {
-				
-			}
-
-			@Override
-			public void onAnimationStart(Animation arg0) {
-				
-			}
-		});
-		//view.setVisibility(View.GONE);
-	}
-
-	class MyGestureDetector extends SimpleOnGestureListener {
-        private static final int SWIPE_MIN_DISTANCE = 120;
-        private static final int SWIPE_MAX_OFF_PATH = 250;
-        private static final int SWIPE_THRESHOLD_VELOCITY = 200;
-        private boolean isFinished = true;
-        
-        @Override
-        public boolean onFling(MotionEvent e1, MotionEvent e2, float velocityX, float velocityY) {
-            try {
-                if (Math.abs(e1.getY() - e2.getY()) > SWIPE_MAX_OFF_PATH)
-                    return false;
-                // right to left swipe
-                if(e1.getX() - e2.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                    //Toast.makeText(CheckOutActivity.this, "Left Swipe", Toast.LENGTH_SHORT).show();
-                	if (isFinished)
-                	{
-                		Log.i("TAG","Left swiping");
-                		this.isFinished = false;
-                		CheckOutActivity.this.swipeLeft();
-                	}
-                }  else if (e2.getX() - e1.getX() > SWIPE_MIN_DISTANCE && Math.abs(velocityX) > SWIPE_THRESHOLD_VELOCITY) {
-                	if (isFinished)
-                	{
-                		Log.i("TAG","Right swiping");
-                		this.isFinished = false;
-                		CheckOutActivity.this.swipeRight();
-                	}                	//Toast.makeText(CheckOutActivity.this, "Right Swipe", Toast.LENGTH_SHORT).show();
-                }
-            } catch (Exception e) {
-                // nothing
-            }
-            return false;
-        }
-        public void tellIsFinished()
-        {
-        	this.isFinished = true;
-        }
-            @Override
-        public boolean onDown(MotionEvent e) {
-              return true;
-        }
-    }
-*/
+//	private void setSpinner(int subCatID)
+//	{
+//		int index = Arrays.asList(this.subCatIDs).indexOf(subCatID);
+//		Spinner spinner = (Spinner) this.findViewById(R.id.categorySelectorID);
+//	    spinner.setSelection(index);
+//	}
 }

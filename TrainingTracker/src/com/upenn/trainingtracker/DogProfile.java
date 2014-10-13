@@ -43,7 +43,7 @@ public class DogProfile
 		return ID;
 	}
 	public void setID(int iD) {
-		ID = iD;
+		this.ID = iD;
 	}
 
 	public String getName() {

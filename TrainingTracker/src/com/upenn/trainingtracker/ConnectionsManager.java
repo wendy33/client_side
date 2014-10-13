@@ -247,32 +247,26 @@ public class ConnectionsManager
 	 */
 	public static boolean isValidJSON(String jsonString)
 	{
-		return isValidJSONObject(jsonString) || isValidJSONArray(jsonString);
-	}
-	public static boolean isValidJSONObject(String jsonString)
-	{
+		boolean isOb = true;
+		boolean isAr = true;
 		try
 		{
 			JSONObject object = new JSONObject(jsonString);
-		}
-		catch (JSONException e)
+		}catch (JSONException e)
 		{
-			return false;
+			isOb =  false;
 		}
-		return true;
-	}
-	public static boolean isValidJSONArray(String jsonString)
-	{
 		try
 		{
 			JSONArray object = new JSONArray(jsonString);
-		}
-		catch (JSONException e)
+		}catch (JSONException e)
 		{
-			return false;
+			isAr =  false;
 		}
-		return true;
+		
+		return isAr || isOb;
 	}
+
 	/**
 	 * Takes the input stream returned from the HTTP request and returns a StringBuidler.  This can
 	 * then be converted to a string.

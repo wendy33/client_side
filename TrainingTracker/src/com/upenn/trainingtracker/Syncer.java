@@ -24,26 +24,28 @@ public class Syncer implements Notifiable
 	@Override
 	public void notifyOfEvent(int eventCode, String message) 
 	{
-		SyncManager sm;
+		SyncManager sm = null;
 		switch(eventCode)
 		{
 		case RESULT_SYNC_CATEGORIES:
-			sm = SyncManager.getInstance(this.context);
-			sm.syncDogsWithServer(this.context, sm, RESULT_SYNC_DOGS);
+			sm = helpSync(sm, RESULT_SYNC_DOGS);
 			break;
 		case RESULT_SYNC_DOGS:
-			sm = SyncManager.getInstance(this.context);
-			sm.syncUsersWithServer(this.context, sm, RESULT_SYNC_USERS);
+			sm = helpSync(sm, RESULT_SYNC_USERS);
 			break;
 		case RESULT_SYNC_USERS:
-			sm = SyncManager.getInstance(this.context);
-			sm.syncEntriesWithServer(this.context, sm, RESULT_SYNC_ENTRIES);
+			sm = helpSync(sm, RESULT_SYNC_ENTRIES);
 			break;
 		case RESULT_SYNC_ENTRIES:
 			this.observer.notifyOfEvent(this.eventCode, message);
 			break;
 		}
 		
+	}
+	private SyncManager helpSync(SyncManager sm, int resultSync) {
+		sm = SyncManager.getInstance(this.context);
+		sm.syncEntriesWithServer(this.context, sm, resultSync);
+		return sm;
 	}
 	
 

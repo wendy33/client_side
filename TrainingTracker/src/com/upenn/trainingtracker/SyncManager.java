@@ -5,13 +5,7 @@ import java.util.List;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.message.BasicNameValuePair;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import android.app.Activity;
 import android.content.Context;
-import android.database.Cursor;
 import android.util.Log;
 
 public class SyncManager implements Notifiable
@@ -179,7 +173,6 @@ public class SyncManager implements Notifiable
 	@Override
 	public void notifyOfEvent(int eventCode, String message)
 	{
-		ConnectionsManager cm = null;
 		Log.i("TAG","MESSAGE: " + message);
 		switch (eventCode)
 		{

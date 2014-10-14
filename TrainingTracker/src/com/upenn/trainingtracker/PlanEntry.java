@@ -50,33 +50,30 @@ public class PlanEntry
 	public void setType(PlanEntry.Type type) {
 		this.type = type;
 	}
-	public PlanEntry(String name, String nameKey, PlanEntry.Type type, String[] options, String[] optionKeys)
-	{
+	public void setNameNameKeyType(String name, String nameKey, PlanEntry.Type type){
 		this.name = name;
 		this.nameKey = nameKey;
+		this.type = type;
+	}
+	public PlanEntry(String name, String nameKey, PlanEntry.Type type, String[] options, String[] optionKeys)
+	{
+		this.setNameNameKeyType(name, nameKey, type);
 		this.options = options;
 		this.optionKeys = optionKeys;
-		this.type = type;
 		init();
 	}
 	public PlanEntry(String name, String nameKey, char type, String[] options, String[] optionKeys)
 	{
-		this.name = name;
-		this.nameKey = nameKey;
-		this.options = options;
-		this.optionKeys = optionKeys;
-		this.type = this.typeFromCharacter(type);	
-		init();
+		this(name, nameKey, PlanEntry.typeFromCharacter(type), options, optionKeys);
 	}
+
 	public PlanEntry(String name, String nameKey, PlanEntry.Type type)
 	{
 		if (type != PlanEntry.Type.CHECKBOX) 
 		{
 			throw new IllegalArgumentException("String array needs to be supplied to construction unless type is CHECKBOX");
 		}
-		this.type = type;
-		this.name = name;
-		this.nameKey = nameKey;
+		this.setNameNameKeyType(name, nameKey, type);
 	}
 	public PlanEntry(String name, String nameKey, char type)
 	{
@@ -85,9 +82,7 @@ public class PlanEntry
 		{
 			throw new IllegalArgumentException("String array needs to be supplied to construction unless type is CHECKBOX");
 		}
-		this.type = typeC;
-		this.name = name;
-		this.nameKey = nameKey;
+		this.setNameNameKeyType(name, nameKey, typeC);
 	}
 	public void init()
 	{

@@ -35,8 +35,8 @@ public class HistoryActivity extends Activity
 	/*
 	private List<String> parentCats;
 	private List<String> subCats;*/
-	private List<String> userNames;
-	private List<String> userFullNames;
+	//private List<String> userNames;
+	//private List<String> userFullNames;
 	
 	
 	private int dogID;
@@ -125,9 +125,9 @@ public class HistoryActivity extends Activity
 		//TrainingReader reader = TrainingReader.getInstance(this);
 		//this.parentCats = reader.getParentCategories();
 		//this.subCats = reader.getAllCategories();
-		UserTether tether = UserTether.getInstance();
-		this.userNames = tether.getUserNames(this);
-		this.userFullNames = tether.getUserFullNames(this);
+		//UserTether tether = UserTether.getInstance();
+		//this.userNames = tether.getUserNames(this);
+		//this.userFullNames = tether.getUserFullNames(this);
 		
 		ParentCategoryTether parentTether = ParentCategoryTether.getInstance();
 		SubCategoryTether subTether = SubCategoryTether.getInstance();

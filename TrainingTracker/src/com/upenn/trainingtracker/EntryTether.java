@@ -66,13 +66,14 @@ public class EntryTether
 			trialsResult = "NONE";
 		}
 		ContentValues values = new ContentValues();
-		values.put(Keys.Entry.DOG_ID, dogID);
-		values.put(Keys.Entry.SUB_CATEGORY_ID, subCatID);
-		values.put(Keys.Entry.USER_ID, userID);
-		values.put(Keys.Entry.PLAN, plan);
-		values.put(Keys.Entry.SESSION_DATE, sessionDate);
-		values.put(Keys.Entry.TRIALS_RESULT, trialsResult);
-		values.put(Keys.Entry.SYNCED, synced);
+		setValues(values,dogID,subCatID, userID, plan, sessionDate, trialsResult, synced);
+//		values.put(Keys.Entry.DOG_ID, dogID);
+//		values.put(Keys.Entry.SUB_CATEGORY_ID, subCatID);
+//		values.put(Keys.Entry.USER_ID, userID);
+//		values.put(Keys.Entry.PLAN, plan);
+//		values.put(Keys.Entry.SESSION_DATE, sessionDate);
+//		values.put(Keys.Entry.TRIALS_RESULT, trialsResult);
+//		values.put(Keys.Entry.SYNCED, synced);
 	
 		DatabaseHandler db = new DatabaseHandler(context);
 		try
@@ -113,6 +114,21 @@ public class EntryTether
 		}
 		ContentValues values = new ContentValues();
 		values.put(Keys.Entry.ID, id);
+		setValues(values,dogID,subCatID, userID, plan, sessionDate, trialsResult, synced);
+//		values.put(Keys.Entry.DOG_ID, dogID);
+//		values.put(Keys.Entry.SUB_CATEGORY_ID, subCatID);
+//		values.put(Keys.Entry.USER_ID, userID);
+//		values.put(Keys.Entry.PLAN, plan);
+//		values.put(Keys.Entry.SESSION_DATE, sessionDate);
+//		values.put(Keys.Entry.TRIALS_RESULT, trialsResult);
+//		values.put(Keys.Entry.SYNCED, synced);
+	
+		DatabaseHandler db = new DatabaseHandler(context);
+		db.insertIntoTable(DatabaseHandler.ENTRY, null, values);
+	}
+	
+	private void setValues(ContentValues values,int dogID, int subCatID, int userID,
+		String plan, String sessionDate, String trialsResult, boolean synced){
 		values.put(Keys.Entry.DOG_ID, dogID);
 		values.put(Keys.Entry.SUB_CATEGORY_ID, subCatID);
 		values.put(Keys.Entry.USER_ID, userID);
@@ -120,10 +136,8 @@ public class EntryTether
 		values.put(Keys.Entry.SESSION_DATE, sessionDate);
 		values.put(Keys.Entry.TRIALS_RESULT, trialsResult);
 		values.put(Keys.Entry.SYNCED, synced);
-	
-		DatabaseHandler db = new DatabaseHandler(context);
-		db.insertIntoTable(DatabaseHandler.ENTRY, null, values);
 	}
+	
 	private void flushPreviousUnExecutedPlans(Context context, int dogID, int subCatID)
 	{
 		DatabaseHandler db = new DatabaseHandler(context);

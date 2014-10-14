@@ -34,7 +34,7 @@ public class HistoryAdapter extends BaseAdapter
 	private List<HistoryEntryWidget> selection = new ArrayList<HistoryEntryWidget>();
 	private HistoryAdapter.SelectionType selectionType = SelectionType.UNITY;
 	private List<String> lastFilterSet;
-	private HistoryActivity activity;
+	//private HistoryActivity activity;
 	private boolean planSelectable;
 	
 	public enum SelectionType
@@ -52,7 +52,7 @@ public class HistoryAdapter extends BaseAdapter
 
 		this.mapper = entryTether.getHistoryWidgetsForDogID(context, dogID, subCatID, this.planSelectable, activity);
 
-		this.activity = activity;
+		//this.activity = activity;
 		this.selection.addAll(this.mapper.getAllWidgets());
 		Log.i("TAG","SELECTION SIZE: " + this.selection.size());
 		this.applyFilterStrings(new ArrayList<String>());
@@ -81,7 +81,7 @@ public class HistoryAdapter extends BaseAdapter
 		}
 		// Get all the lists
 		List<List<HistoryEntryWidget>> entryLists = new ArrayList<List<HistoryEntryWidget>>();
-		boolean emptyListPresent = false;
+		//boolean emptyListPresent = false;
 		for (String filter : filters)
 		{
 			List<HistoryEntryWidget> list = mapper.getListForFilter(filter);
@@ -113,10 +113,10 @@ public class HistoryAdapter extends BaseAdapter
 	{
 		Collections.sort(this.selection);
 	}
-	public void clearFilters()
-	{
-		
-	}
+//	public void clearFilters()
+//	{
+//		
+//	}
 	
 	@Override
 	public int getCount() 

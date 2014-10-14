@@ -85,8 +85,8 @@ public class LogInActivity extends Activity implements Notifiable
     {
     	EditText usernameView = (EditText) this.findViewById(R.id.username);
     	EditText passwordView = (EditText) this.findViewById(R.id.password);
-    	String userName = usernameView.getText().toString().trim();
-    	String password = passwordView.getText().toString().trim();
+    	String userName = getString(usernameView);
+    	String password = getString(passwordView);
     	
     	UserTether tether = UserTether.getInstance();
     	if (tether.isValiduser(this, userName, password))
@@ -234,11 +234,11 @@ public class LogInActivity extends Activity implements Notifiable
 		    	EditText emailET = (EditText) dialog.findViewById(R.id.emailID);
 		    	EditText phoneET = (EditText) dialog.findViewById(R.id.phoneID);
 		    	
-		    	String fullName = fullNameET.getText().toString().trim();
-		    	String userName = userNameET.getText().toString().trim();
-		    	String password = passwordET.getText().toString().trim();
-		    	String email = emailET.getText().toString().trim();
-		    	String phone = phoneET.getText().toString().trim();
+		    	String fullName = getString(fullNameET);
+		    	String userName = getString(userNameET);
+		    	String password = getString(passwordET);
+		    	String email = getString(emailET);
+		    	String phone = getString(phoneET);
 		    	
 		    	if (fullName.equals("") || userName.equals("") || password.equals("") || email.equals("") ||
 		    			phone.equals(""))
@@ -251,6 +251,10 @@ public class LogInActivity extends Activity implements Notifiable
 			}
     	});
     	dialog.show();
+    }
+    
+    public String getString(EditText obj){
+    	return obj.getText().toString().trim();
     }
 
 }

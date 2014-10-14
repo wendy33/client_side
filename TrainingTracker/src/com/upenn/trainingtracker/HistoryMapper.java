@@ -85,26 +85,24 @@ public class HistoryMapper
 	}
 	private void addSubSetToParentForTypeKey(List<HistoryEntryWidget> parent, Map<HistoryEntryWidget.Type, List<HistoryEntryWidget>> map, String filter)
 	{
+		List<HistoryEntryWidget> subset = null;
 		if (filter.equals("Passed"))
 		{
-			List<HistoryEntryWidget> subset = map.get(HistoryEntryWidget.Type.Passed);
-			parent.addAll(subset);
+			subset = map.get(HistoryEntryWidget.Type.Passed);
 		}
 		else if (filter.equals("Aborted"))
 		{
-			List<HistoryEntryWidget> subset = map.get(HistoryEntryWidget.Type.Aborted);
-			parent.addAll(subset);
+		    subset = map.get(HistoryEntryWidget.Type.Aborted);
 		}
 		else if (filter.equals("Failed"))
 		{
-			List<HistoryEntryWidget> subset = map.get(HistoryEntryWidget.Type.Failed);
-			parent.addAll(subset);
+			subset = map.get(HistoryEntryWidget.Type.Failed);
 		}
 		else if (filter.equals("Planned"))
 		{
-			List<HistoryEntryWidget> subset = map.get(HistoryEntryWidget.Type.Planned);
-			parent.addAll(subset);
+			subset = map.get(HistoryEntryWidget.Type.Planned);
 		}
+		parent.addAll(subset);
 	}
 	
 

@@ -37,7 +37,7 @@ public class MainActivity extends Activity
     
     // Sync interval constants
     public static final long SYNC_INTERVAL_IN_SECONDS = (60 * 15);
-   private ContentResolver mResolver;
+   //private ContentResolver mResolver;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) 
@@ -52,7 +52,7 @@ public class MainActivity extends Activity
     public void setUpAutoSync()
     {
         // Get the content resolver for your app
-        mResolver = getContentResolver();
+        //mResolver = getContentResolver();
         /*
          * Turn on periodic syncing
          */
